@@ -1,0 +1,48 @@
+#spring:
+#  application:
+#    name: config-client
+#  cloud:
+#    config:
+#      label: master
+#      profile: dev
+#      uri: http://localhost:8882/
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master
+      profile: dev
+      discovery:
+        enabled: true
+        serviceId: config-server
+    bus:
+      enabled: true
+      trace.enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+management.endpoints.web.exposure.include: bus-refresh
+server:
+  port: 8881
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8889/eureka/
+
+# spring.cloud.config.label 指明远程仓库的分支
+# spring.cloud.config.profile
+# dev开发环境配置文件
+# test测试环境
+# pro正式环境
+# spring.cloud.config.uri= http://localhost:8888/ 指明配置服务中心的网址。
+
+
+# /{application}/{profile}[/{label}]
+# /{application}-{profile}.yml
+# /{label}/{application}-{profile}.yml
+# /{application}-{profile}.properties
+# /{label}/{application}-{profile}.properties
